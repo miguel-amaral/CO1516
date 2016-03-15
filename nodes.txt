@@ -1,0 +1,25 @@
+          Expressao       - expression node
+
+          primária
+          unária          - unary_expression_node
+          multiplicativa  - mul_node
+          additiva        - add_node
+          comparativa     - binary_expression_node
+          igualdade
+          nao-logica      - neg_node
+          e-logico
+          ou-logico
+          atribuiçoa      - assignement
+          leitura         - read_node
+          identity
+          simetrico
+
+
+          FILE
+          declaration ?
+          variable    ?
+          function
+          block
+          instruction
+          conditional
+          iteration
