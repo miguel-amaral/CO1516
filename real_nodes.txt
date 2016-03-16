@@ -1,0 +1,21 @@
+var_node					not_sure if simple or left value (inheritance)
+var_dec_node				.
+func_arg_node
+function_call_node
+function_dec_node
+function_def_node
+return_node
+for_node
+break_node
+continue_node
+print_node
+read_node
+not_node
+and_node
+or_node
+assignment_node
+index_node
+identity_node
+mem_alloc_node
+mem_position_node
+file_node
