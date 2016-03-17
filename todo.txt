@@ -1,0 +1,3 @@
+mem_aloc
+index
+identifier(herança lvalue)
