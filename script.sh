@@ -50,20 +50,20 @@ done
 ################################################################################
 ################################################################################
 ############################ Writing in source Files ###########################
-for file in postfix_writer.cpp type_checker.cpp xml_writer.cpp
+for file in postfix_writer type_checker xml_writer
 do
 	for node in ${nodesArray[@]}
 	do
 		echo  "
 //---------------------------------------------------------------------------
 
-void do_$node(zu::$node * const node, int lvl){
+void zu::$file::do_$node(zu::$node * const node, int lvl){
   //TODO:FIXME:XXX
-}" >> $file
+}" >> $file.cpp
 	done
-	echo -e "$file"
+	echo -e "$file.cpp"
 done
 ############################ Writing in source Files ###########################
 ################################################################################
 ################################################################################
-echo -e -n "\e[32;1mWell Done, now sit back and relax, you've done a WONDERFUL job\n\t\t\t\e[33;1mKAPPINHA\e[0m"
+echo -e -n "\e[32;1mWell Done, now sit back and relax, you've done a WONDERFUL job\n\t\t\t\e[33;1mKAPPINHA\n\e[0m"
