@@ -22,9 +22,15 @@ COMPILERFAIL=()
 YASMFAIL=()
 LDFAIL=()
 DIFFFAIL=()
-
+flagDif=0
 
 #--------------------------------------------------------------------------------------#
+
+if [ $1 ]
+then
+	flagDif=1
+fi
+
 for file in ${DIR}*.zu
 do
   let COUNTER=COUNTER+1
@@ -63,7 +69,7 @@ do
 
   # executar o compilador
   printf "%3s :%13s " "$COUNTER" "$N"
-  { ./project/zu "$file"; } >& "$NAME.output";
+  { ./project/zu "$file"; } #>& "$NAME.output";
   if [[ "$?" -eq "0" ]]; then
     echo -e -n "C:\e[32m1\e[0m "
   else
@@ -75,7 +81,7 @@ do
 
   # produzir o ficheiro binario
   cd $DIR;
-  { yasm -felf32 "$N.asm"; } >& /dev/null
+  { yasm -felf32 "$N.asm"; } #>& /dev/null
   if [[ "$?" -eq "0" ]]; then
     echo -e -n  "Y:\e[32m2\e[0m "
   else
@@ -95,27 +101,32 @@ do
 	continue
 
   fi
+
+  #Executar o programa
   { ./"$N"exec > "$N.out"; } >& /dev/null
   if [[ "$?" -eq "0" ]]; then
 	  echo -e -n "R:\e[32m4\e[0m "
-  else
-	  echo #echo -e    "R:\e[31mF\e[0m ";
-	  let FAILEDTESTS=FAILEDTESTS+1
-	  continue
+#  else
+#	  echo #echo -e    "R:\e[31mF\e[0m ";
+#	  let FAILEDTESTS=FAILEDTESTS+1
+#	  continue
   fi
   { cd ../; } >& /dev/null
 
   #echo
   #echo
   #echo
-  DIFF=$(diff -w -E -B "$NAME.out" "$EXPECTED$N.out")
+  DIFF=$(diff -u -w -E -B "$NAME.out" "$EXPECTED$N.out")
   if [ "$DIFF" != "" ];
   then
       let FAILEDTESTS=FAILEDTESTS+1
       echo #echo -e "D:\e[31mFAILED\e[0m"
 
       DIFFFAIL+=("$N")
-	  #echo -n -e "$DIFF\n"
+      if [ $flagDif -eq 1 ]
+      then
+	  echo -n -e "$DIFF\n"
+      fi
   else
       echo -e "D:\e[32m5\e[0m"
 	  let COMPLETE_TESTS=COMPLETE_TESTS+1
@@ -123,7 +134,8 @@ do
 
 done
 #--------------------------------------------------------------------------------------#
-	exit
+
+read 
 
 echo
 echo

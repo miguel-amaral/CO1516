@@ -18,7 +18,7 @@ done < real_nodes.txt
 ################################################################################
 ################################################################################
 ############################ Writing in header Files ###########################
-for file in postfix_writer.h type_checker.h xml_writer.h
+for file in postfix_writer.h type_checker.h xml_writer.h enter_counter.h
 do
 	for node in ${nodesArray[@]}
 	do
@@ -50,7 +50,7 @@ done
 ################################################################################
 ################################################################################
 ############################ Writing in source Files ###########################
-for file in postfix_writer type_checker xml_writer
+for file in postfix_writer type_checker xml_writer enter_counter
 do
 	for node in ${nodesArray[@]}
 	do
