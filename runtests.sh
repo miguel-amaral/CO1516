@@ -69,7 +69,7 @@ do
 
   # executar o compilador
   printf "%3s :%13s " "$COUNTER" "$N"
-  { ./project/zu "$file"; } #>& "$NAME.output";
+  { ./project/zu -g "$file"; } #>& "$NAME.output";
   if [[ "$?" -eq "0" ]]; then
     echo -e -n "C:\e[32m1\e[0m "
   else
@@ -112,11 +112,10 @@ do
 #	  continue
   fi
   { cd ../; } >& /dev/null
-
   #echo
   #echo
   #echo
-  DIFF=$(diff -u -w -E -B "$NAME.out" "$EXPECTED$N.out")
+  DIFF=$(diff  -w -b -B "$NAME.out" "$EXPECTED$N.out")
   if [ "$DIFF" != "" ];
   then
       let FAILEDTESTS=FAILEDTESTS+1
